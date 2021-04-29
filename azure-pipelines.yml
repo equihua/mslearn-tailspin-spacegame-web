@@ -13,7 +13,7 @@ ms.locfileid: "104286851"
 trigger:
 - '*'
 pool:
-  vmImage: ubuntu-18.04
+  vmImage: 'windows-latest'
   demands:
   - npm
 variables:
