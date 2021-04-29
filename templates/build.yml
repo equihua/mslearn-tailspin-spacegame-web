@@ -1,0 +1,26 @@
+### YamlMime:Yaml
+
+parameters:
+- name: buildConfiguration
+  type: string
+  default: Release
+  values:
+    - Release
+    - Debug
+
+steps:
+  - task: DotNetCoreCLI@2
+    displayName: Build the project - ${{ parameters.buildConfiguration }}
+    inputs:      
+      command: build
+      arguments: --no-restore --configuration ${{ parameters.buildConfiguration }}
+      projects: '$(solution)'
+
+  - task: DotNetCoreCLI@2
+    displayName: Publish the project - ${{ parameters.buildConfiguration }}
+    inputs:
+      command: publish
+      projects: '$(solution)'
+      publishWebProjects: false
+      arguments: --no-build --configuration ${{ parameters.buildConfiguration }} --output $(Build.ArtifactStagingDirectory)/${{ parameters.buildConfiguration }}
+      zipAfterPublish: true
