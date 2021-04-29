@@ -18,7 +18,7 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'x64'
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
@@ -53,7 +53,6 @@ steps:
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
